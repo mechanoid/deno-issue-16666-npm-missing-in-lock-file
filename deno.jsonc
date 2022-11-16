@@ -1,0 +1,6 @@
+{
+  "tasks": {
+    "deps:load": "deno cache --lock --reload deps.ts",
+    "deps:update": "deno cache --lock --lock-write deps.ts"
+  }
+}
