@@ -4,22 +4,19 @@ See https://github.com/denoland/deno/issues/16666 for more information
 
 ## Issues
 
-1. `deno cache --lock --reload deps.ts` creates a deno.lock file, but `--lock-write` is not set
-2. `deno cache --lock --reload deps.ts` creates a lock file, that contains `npm` dependencies
-3. `deno cache --lock --lock-write deps.ts` with `--lock-write` enabled, writes a lock file without `npm` deps
+1. `deno cache --lock --reload deps.ts` creates a lock file, that contains `npm` dependencies,
+same command with `--lock-write` does not!
 
 ## Tests
 
 
-1./2.:
 ```
 rm deno.lock # make sure the file is not created yet
 deno task deps:load # should not create a lock file?!
-# => ⚡️ deno.lock is created
+# => ✅ deno.lock is created (because of auto discovery)
 # => ✅ deno.lock contains `npm` deps
 ```
 
-2.:
 ```
 rm deno.lock # make sure the file is not created yet
 deno task deps:update # should create a lock file
